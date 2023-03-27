@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  idempiere:
+    image: idempiereofficial/idempiere:10
+    hostname: idempiere
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - idempiere_config:/opt/idempiere/configuration
+      - idempiere_plugins:/opt/idempiere/plugins
+    ports:
+      - 8080:8080
+      - 8443:8443
+      - 12612:12612
+    networks:
+      - postgres_pgNet
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: idempiere
+      DB_PASS: idempiere
+      DB_NAME: idempiere
+     
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  idempiere_plugins:
+  idempiere_config:
+
+networks:
+  postgres_pgNet:
+    external: true # include postgres network

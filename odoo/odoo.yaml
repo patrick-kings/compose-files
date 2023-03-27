@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  odoo:
+    image: odoo:latest
+    hostname: odoo
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - odoo-web-data:/var/lib/odoo
+    ports:
+      - 8069:8069
+      - 8072:8072
+    tty: true
+    networks:
+      - postgres_pgNet
+    environment:
+      HOST: postgres
+      PORT: 5432
+      USER: odoo
+    deploy:
+      restart_policy:
+        condition: any
+
+
+#        
+volumes:
+  odoo-web-data:
+
+networks:
+  postgres_pgNet:
+    external: true # include postgres network

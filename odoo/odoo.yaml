@@ -9,7 +9,6 @@ services:
       - odoo-web-data:/var/lib/odoo
     ports:
       - 8069:8069
-      - 8072:8072
     tty: true
     networks:
       - postgres_pgNet
@@ -17,6 +16,7 @@ services:
       HOST: postgres
       PORT: 5432
       USER: odoo
+      PASSWORD: odoo
     deploy:
       restart_policy:
         condition: any

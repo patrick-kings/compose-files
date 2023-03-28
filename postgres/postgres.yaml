@@ -2,8 +2,8 @@ version: "3.9"
 
 services:
   postgres:
-    container_name: postgres_container
     image: postgres:15.2
+    hostname: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
@@ -19,8 +19,8 @@ services:
         condition: any
 
   pgadmin:
-    container_name: pgadmin_container
     image: dpage/pgadmin4
+    hostname: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}

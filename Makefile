@@ -10,3 +10,7 @@ deploy-postgres:
 
 deploy-idempiere:
 	timestamp=$(timestamp) docker stack deploy --prune --compose-file idempiere/idempiere.yaml idempiere
+
+
+deploy-erpnext:
+	docker stack deploy --prune --compose-file erpnext/erpnext.yaml erpnext

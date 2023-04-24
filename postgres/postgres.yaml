@@ -10,6 +10,11 @@ services:
       PGDATA: /data/postgres
     volumes:
       - pgdata:/data/postgres
+    configs:
+      - source: create-user.sql
+        target: /docker-entrypoint-initdb.d/create-user.sql
+        mode: 440
+
     ports:
       - 5432:5432
     networks:
@@ -34,6 +39,13 @@ services:
     deploy:
       restart_policy:
         condition: any
+
+
+configs:
+  create-user.sql:
+    name: create-user-${timestamp}.sql
+    file: ./create-user.sql
+
 
 volumes:
   pgdata:

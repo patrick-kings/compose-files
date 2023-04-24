@@ -1,6 +1,6 @@
 timestamp=$$(date +%s)
 
-deploy-odoo:
+deploy-odoo: deploy-postgres
 	timestamp=$(timestamp) docker stack deploy --prune --compose-file odoo/odoo.yaml odoo
 
 

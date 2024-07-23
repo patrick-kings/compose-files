@@ -14,7 +14,7 @@ services:
       - postgres_pgNet
     environment:
       HOST: postgres
-      PORT: 5432
+      ORT: 5432
       USER: odoo
       PASSWORD: odoo
     deploy:

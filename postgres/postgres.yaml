@@ -14,7 +14,6 @@ services:
       - source: create-user.sql
         target: /docker-entrypoint-initdb.d/create-user.sql
         mode: 440
-
     ports:
       - 5432:5432
     networks:
@@ -24,7 +23,7 @@ services:
         condition: any
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     hostname: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
@@ -40,12 +39,10 @@ services:
       restart_policy:
         condition: any
 
-
 configs:
   create-user.sql:
     name: create-user-${timestamp}.sql
     file: ./create-user.sql
-
 
 volumes:
   pgdata:
@@ -54,4 +51,3 @@ volumes:
 networks:
   pgNet:
     driver: overlay
-    

@@ -1,1 +1,1 @@
-create role odoo with login nosuperuser createdb createrole inherit replication connection limi -1 password 'odoo';
+create role odoo with login nosuperuser createdb createrole inherit replication password 'odoo';

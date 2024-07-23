@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo
+    hostname: mongo
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - mongo-data:/data/db
+    # configs:
+    #   - source: mongod.conf
+    #     target: /etc/mongod.conf
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: toor
+      MONGO_INITDB_USERNAME: tinkler
+      MONGO_INITDB_PASSWORD: tinkle
+      MONGO_INITDB_DATABASE: server0
+    ports:
+      - target: 27017
+        published: 27017
+        protocol: tcp
+        mode: host
+    networks:
+      - mNet
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 2s
+
+configs:
+  mongod.conf:
+    name: mongod_${timestamp}.conf
+    file: ./mongod.conf
+
+volumes:
+  mongo-data:
+
+networks:
+  mNet:

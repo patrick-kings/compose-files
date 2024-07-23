@@ -119,6 +119,8 @@ services:
     networks:
       - erpnext
       - nginx
+    ports:
+      - 8180:8080
 
   queue-default:
     image: frappe/erpnext:v14
@@ -234,9 +236,7 @@ volumes:
   sites:
 
   logs:
-   
 
 networks:
   nginx:
   erpnext:
-    

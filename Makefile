@@ -14,3 +14,6 @@ deploy-idempiere:
 
 deploy-erpnext:
 	docker stack deploy --prune --compose-file erpnext/erpnext.yaml erpnext
+
+deploy-mysql:
+	docker stack deploy --prune --compose-file mysql/mysql.yaml mysql

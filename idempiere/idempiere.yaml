@@ -6,8 +6,8 @@ services:
     hostname: idempiere
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - idempiere_config:/opt/idempiere/configuration
-      - idempiere_plugins:/opt/idempiere/plugins
+      - idempiere_config_:/opt/idempiere/configuration
+      - idempiere_plugins_:/opt/idempiere/plugins
     ports:
       - 8080:8080
       - 8443:8443
@@ -17,17 +17,17 @@ services:
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_USER: idempiere
-      DB_PASS: idempiere
+      DB_USER: postgres
+      DB_PASS: postgres
       DB_NAME: idempiere
-     
+
     deploy:
       restart_policy:
         condition: on-failure
 
 volumes:
-  idempiere_plugins:
-  idempiere_config:
+  idempiere_plugins_:
+  idempiere_config_:
 
 networks:
   postgres_pgNet:

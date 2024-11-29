@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0.40
+    hostname: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - mysql_net
+    configs:
+      - source: mysqld.conf
+        target: /etc/mysql/conf.d/mysqld.cnf
+        mode: 440
+    deploy:
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: mysqladmin ping -h localhost --password=toor
+      interval: 1s
+      retries: 15
+
+configs:
+  mysqld.conf:
+    name: mysqld-${timestamp}.conf
+    file: ./mysqld.conf
+volumes:
+  mysql_data:
+
+networks:
+  mysql_net:
+    driver: overlay

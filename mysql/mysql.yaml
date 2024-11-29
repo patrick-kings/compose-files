@@ -28,6 +28,7 @@ configs:
   mysqld.conf:
     name: mysqld-${timestamp}.conf
     file: ./mysqld.conf
+
 volumes:
   mysql_data:
 

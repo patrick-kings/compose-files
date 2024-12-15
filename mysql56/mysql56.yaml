@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:5.6
+    hostname: mysql
+
+    ports:
+      - 3305:3306
+    networks:
+      - mysql_net
+
+    volumes:
+      - mysql56_data:/var/lib/mysql
+
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      TIMEZONE: Africa/Nairobi
+
+    configs:
+      - source: mysqld.conf
+        target: /etc/mysql/conf.d/mysqld.cnf
+        mode: 440
+
+    ulimits:
+      nofile: # Fix memory leak issue on some systems when LimitCORE=infinity (containerd)
+        soft: 1048576
+        hard: 1048576
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+    healthcheck:
+      test: mysqladmin ping -h localhost --password=toor
+      interval: 1s
+      retries: 15
+
+configs:
+  mysqld.conf:
+    name: mysqld-${timestamp}.conf
+    file: ./mysqld.conf
+
+volumes:
+  mysql56_data:
+
+networks:
+  mysql_net:
+    driver: overlay

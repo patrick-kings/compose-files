@@ -17,3 +17,6 @@ deploy-erpnext:
 
 deploy-mysql:
 	docker stack deploy --prune --compose-file mysql/mysql.yaml mysql
+
+deploy-mysql56:
+	docker stack deploy --prune --compose-file mysql56/mysql56.yaml mysql56
